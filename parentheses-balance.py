@@ -22,19 +22,19 @@ def get_open_bracket(bracket):
 
 def is_balanced(input):
     stack = []
-    for ch in input:
-        if ch in OPEN_BRACKETS:
-            stack.append(ch)
-        elif ch in CLOSE_BRACKETS:
+    for index, char in enumerate(input):
+        if char in OPEN_BRACKETS:
+            stack.append(char)
+        elif char in CLOSE_BRACKETS:
             stack_length = len(stack)
             if stack_length == 0:
-                return False
-            elif stack[stack_length - 1] == get_open_bracket(ch):
+                return False, index
+            elif stack[stack_length - 1] == get_open_bracket(char):
                 stack.pop()
             else:
-                stack.append(ch)
+                return False, index
 
-    return len(stack) == 0
+    return len(stack) == 0, len(stack)
 
 
 inputs = [
@@ -46,4 +46,5 @@ inputs = [
 
 if __name__ == '__main__':
     for input in inputs:
-        print(input, is_balanced(input))
+        balanced, offending = is_balanced(input)
+        print(input, 'balanced' if balanced else 'imbalanced at %s' % offending)
