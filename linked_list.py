@@ -28,10 +28,41 @@ class LinkedList:
         ll_str += 'None'
         return ll_str
 
+    def reverse(self, currentNode):
+        if self.head is None:
+            return
+        if currentNode.next is None:
+            self.head = currentNode
+            return currentNode
+        nextNode = self.reverse(currentNode.next)
+        nextNode.next = currentNode
+        currentNode.next = None
+        return currentNode
+
+    def clear(self):
+        self.head = None
+
 
 if __name__ == '__main__':
     ll = LinkedList()
     ll.push(1)
     ll.push(2)
     ll.push(3)
+    print(ll)
+    ll.reverse(ll.head)
+    print(ll)
+
+    ll.clear()
+    print(ll)
+    ll.reverse(ll.head)
+    print(ll)
+
+    ll.push(1)
+    print(ll)
+    ll.reverse(ll.head)
+    print(ll)
+
+    ll.push(2)
+    print(ll)
+    ll.reverse(ll.head)
     print(ll)
