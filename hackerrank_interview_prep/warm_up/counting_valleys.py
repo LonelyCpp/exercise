@@ -16,6 +16,7 @@ starting with a step down from sea level and ending with a step up
 to sea level.
 Given Gary's sequence of up and down steps during his last hike, 
 find and print the number of valleys he walked through.
+https://www.hackerrank.com/challenges/counting-valleys/problem
 """
 
 #!/bin/python3
