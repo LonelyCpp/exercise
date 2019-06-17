@@ -49,7 +49,6 @@ class ArrayRenderItem:
 
 
 def quick_sort_partition(arr, low, high):
-    print('pv')
     i = low - 1
     pivot = arr[high].value
 
@@ -69,7 +68,6 @@ def quick_sort_partition(arr, low, high):
 
 
 def quick_sort(arr, low, high):
-    print('qs')
     if low < high:
         pivot = quick_sort_partition(arr, low, high)
 
@@ -108,7 +106,6 @@ def main():
             elif event.type == pygame.USEREVENT:
                 if event.event_code == 'quick_sort_update':
                     redraw(square_array)
-                    print('updating')
 
 
 def redraw(square_array):
