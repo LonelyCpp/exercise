@@ -23,20 +23,29 @@ class BinarySearchTree:
         while endReached is False:
             if currentNode.data > newNode.data:
                 if currentNode.left is None:
-                    currentNode.left = Node
+                    currentNode.left = newNode
                     endReached = True
                 else:
                     currentNode = currentNode.left
             else:
                 if currentNode.right is None:
-                    currentNode.right = Node
+                    currentNode.right = newNode
                     endReached = True
                 else:
                     currentNode = currentNode.right
+
+    @staticmethod
+    def inOrder(node):
+        if node is None:
+            return
+        BinarySearchTree.inOrder(node.left)
+        print(node)
+        BinarySearchTree.inOrder(node.right)
 
 
 if __name__ == "__main__":
     bst = BinarySearchTree()
     bst.insert(2)
     bst.insert(1)
+    bst.insert(3)
     BinarySearchTree.inOrder(bst.root)
