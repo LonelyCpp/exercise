@@ -9,20 +9,17 @@ required to sort the array in ascending order.
 
 def minimum_swaps(arr):
     swaps = 0
-    first = 0
-    last = len(arr) - 1
-    swaps = 0
-    while first < last:
-        while (arr[first] == first + 1 and first < last):
-            first += 1
-        if first < last:
-            temp = arr[arr[first] - 1]
-            arr[arr[first] - 1] = arr[first]
-            arr[first] = temp
+    for index, val in enumerate(arr):
+        if arr[index] == index + 1:
+            continue
+        while arr[index] != index + 1:
+            tmp = arr[arr[index] - 1]
+            arr[arr[index] - 1] = arr[index]
+            arr[index] = tmp
             swaps += 1
 
     return swaps
 
 
 if __name__ == '__main__':
-    print(minimum_swaps([1, 3, 5, 4]))
+    print(minimum_swaps([2, 3, 4, 1, 5]))
