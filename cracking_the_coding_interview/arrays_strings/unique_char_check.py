@@ -1,3 +1,10 @@
+"""
+Is Unique: Implement an algorithm to determine if a string
+has all unique characters. What if you cannot use additional
+data structures?
+"""
+
+
 def check_unique_wds(string):
     """
     Checks if a string has all unique characters using an extra data structure.
