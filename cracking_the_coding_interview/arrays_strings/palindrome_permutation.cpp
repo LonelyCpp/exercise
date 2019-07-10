@@ -18,19 +18,8 @@ std::string permuPal(std::string str)
 {
   std::map<char, int> counter;
   for (char c : str)
-  {
-    auto position = counter.find(c);
-    if (position == counter.end())
-    {
-      // item not found
-      counter.insert(std::pair<char, int>(c, 1));
-    }
-    else
-    {
-      // item exists
-      position->second++;
-    }
-  }
+    ++counter[c];
+
   const int STR_LEN = str.length();
   bool odd_flag = false;
   for (auto itr = counter.begin(); itr != counter.end(); itr++)
