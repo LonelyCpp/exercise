@@ -43,7 +43,7 @@ def main():
 
     center_pos = [300, background.get_rect().centery]
     time = 0
-    BASE_RADIUS = 50
+    BASE_RADIUS = 80
     ITERATIONS = 5
 
     wave_positions = []
@@ -61,8 +61,8 @@ def main():
         line_end_y = 0
         circle_center = copy.deepcopy(center_pos)
 
-        wave = SquareWave()
-        # wave = SawtoothWave()
+        # wave = SquareWave()
+        wave = SawtoothWave()
 
         for circle_index in range(ITERATIONS):
             radius = abs(wave.get_radius(circle_index, BASE_RADIUS))
@@ -70,8 +70,6 @@ def main():
             # circle
             pygame.draw.circle(screen, BLACK, circle_center, int(radius), 1)
 
-            # line_end_x,  = radius * math.cos(n * time)
-            # line_end_y = radius * math.sin(n * time)
             line_end_x, line_end_y = wave.get_position(circle_index, time)
 
             # scale offset
@@ -92,7 +90,7 @@ def main():
                          [line_end_x, line_end_y], [500, line_end_y], 1)
 
         for i in range(len(wave_positions)):
-            wave_positions[i][0] += 2
+            wave_positions[i][0] += 1
 
         wave_positions.insert(0, [500, line_end_y])
 
@@ -103,7 +101,7 @@ def main():
             wave_positions.pop()
 
         pygame.display.flip()
-        time += 0.1
+        time += 0.05
 
 
 if __name__ == '__main__':
