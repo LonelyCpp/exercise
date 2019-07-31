@@ -38,8 +38,30 @@ for (let i = 0; i < 100; i++) {
   bodies.push(t);
 }
 
+let pendulumBall1 = new Ball(100, 100, 10);
+let pendulumBall2 = new Ball(200, 200, 10);
+pendulumBall1.body.mass = 100;
+pendulumBall2.body.mass = 100;
+bodies.push(pendulumBall1);
+bodies.push(pendulumBall2);
+let c1 = new Matter.Constraint.create({
+  bodyA: pendulumBall1.body,
+  bodyB: ceiling.body,
+  length: 200,
+  stiffness: 1,
+  damping: 1
+});
+let c2 = new Matter.Constraint.create({
+  bodyA: pendulumBall1.body,
+  bodyB: pendulumBall2.body,
+  length: 200,
+  stiffness: 1,
+  damping: 1
+});
+
 // add all of the bodies to the world
 World.add(engine.world, bodies.map(item => item.body));
+World.add(engine.world, [c1, c2]);
 
 // run the engine
 Engine.run(engine);

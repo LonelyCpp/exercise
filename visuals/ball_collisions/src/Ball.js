@@ -2,7 +2,8 @@ class Ball {
   constructor(x, y, radius) {
     this.body = Matter.Bodies.circle(x, y, radius, {
       friction: 0.2,
-      restitution: 0.8
+      restitution: 0.8,
+      frictionAir: 0
     });
   }
 
