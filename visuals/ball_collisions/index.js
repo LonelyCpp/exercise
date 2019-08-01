@@ -112,5 +112,14 @@ function draw() {
   bodies.forEach(body => {
     body.draw();
   });
+
   // var wallLeft = new Wall(0, 0, 60, 1200);
+  constraints.forEach(constraint => {
+    line(
+      constraint.bodyA.position.x,
+      constraint.bodyA.position.y,
+      constraint.bodyB.position.x,
+      constraint.bodyB.position.y
+    );
+  });
 }
