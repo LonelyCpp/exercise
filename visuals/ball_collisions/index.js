@@ -1,26 +1,13 @@
 // module aliases
 const Engine = Matter.Engine,
-  Render = Matter.Render,
   World = Matter.World,
   Bodies = Matter.Bodies;
 
 // create an engine
 const engine = Engine.create();
 
-// engine.world.gravity.y = 0;
-
-// create a renderer
-const render = Render.create({
-  element: document.body,
-  engine: engine,
-  options: {
-    height: 610,
-    width: 810,
-    wireframes: false
-  }
-});
-
 const bodies = [];
+const constraints = [];
 
 var wallLeft = new Wall(0, 0, 60, 1200);
 var wallRight = new Wall(800, 0, 60, 1200);
@@ -44,30 +31,31 @@ pendulumBall1.body.mass = 100;
 pendulumBall2.body.mass = 100;
 bodies.push(pendulumBall1);
 bodies.push(pendulumBall2);
-let c1 = new Matter.Constraint.create({
-  bodyA: pendulumBall1.body,
-  bodyB: ceiling.body,
-  length: 200,
-  stiffness: 1,
-  damping: 1
-});
-let c2 = new Matter.Constraint.create({
-  bodyA: pendulumBall1.body,
-  bodyB: pendulumBall2.body,
-  length: 200,
-  stiffness: 1,
-  damping: 1
-});
+constraints.push(
+  new Matter.Constraint.create({
+    bodyA: pendulumBall1.body,
+    bodyB: ceiling.body,
+    length: 200,
+    stiffness: 1,
+    damping: 1
+  })
+);
+constraints.push(
+  new Matter.Constraint.create({
+    bodyA: pendulumBall1.body,
+    bodyB: pendulumBall2.body,
+    length: 200,
+    stiffness: 1,
+    damping: 1
+  })
+);
 
 // add all of the bodies to the world
 World.add(engine.world, bodies.map(item => item.body));
-World.add(engine.world, [c1, c2]);
+World.add(engine.world, constraints);
 
 // run the engine
 Engine.run(engine);
-
-// run the renderer
-Render.run(render);
 
 document.addEventListener(
   'keydown',
@@ -112,3 +100,26 @@ document.addEventListener(
   },
   false
 );
+
+function setup() {
+  createCanvas(810, 610);
+  background(100);
+}
+
+function draw() {
+  background(100);
+  stroke(255);
+  bodies.forEach(body => {
+    body.draw();
+  });
+
+  // var wallLeft = new Wall(0, 0, 60, 1200);
+  constraints.forEach(constraint => {
+    line(
+      constraint.bodyA.position.x,
+      constraint.bodyA.position.y,
+      constraint.bodyB.position.x,
+      constraint.bodyB.position.y
+    );
+  });
+}
